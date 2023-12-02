@@ -34,11 +34,49 @@ def main():
 
     initial_delay = 1000 #1sec
     pygame.time.delay(initial_delay)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if not game_over:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        bird_speed = -bird_jump
+            
+        if not game_over:
+            screen.fill(WHITE)
+            bird_speed += bird_gravity
+            bird_y += bird_speed
+            pipe_x -= pipe_speed
+            draw_pipe(screen, pipe_x, pipe_height1, pipe_height2, pipe_width, HEIGHT)
+            draw_bird(screen, bird_x, bird_y,bird_width, bird_height)
+            if bird_y + bird_height >= HEIGHT or bird_y <=0:
+                game_over = True
+            if bird_x +bird_y > pipe_x and bird_x < pipe_x + pipe_width:
+                if bird_y < pipe_height1 or bird_y + bird_height > pipe_height1 + 150:
+                    game_over = True
+                if bird_y < pipe_height2 or bird_y + bird_height > pipe_height2 + 150:
+                    game_over = True
+            if pipe_x + pipe_width < bird_x and not pipe_passed:
+                score += 1
+                pipe_passed = True
+        if game_over:
+            game_over_screen(screen, WIDTH, HEIGHT)
+            
 def draw_bird(screen, x, y, width, height):
     pygame.draw.rect(screen, (255, 0, 0), (x, y, width, height))
 def draw_pipe(screen, x, height1, height2, width, screen_height):
     pygame.draw.rect(screen, (0, 128, 0), (x, 0, width, height1))
     pygame.draw.rect(screen, (0, 128, 0), (x,height2 + 150, width, screen_height - height2 - 150))
-
-    
+def show_score(screen, font, score):
+    text = font.render("Score: " + str(score), True, (0,0,0))
+    screen.blit(text, (10,10))
+def game_over_screen(screen, width, height):
+    screen.fill((0, 0, 0))
+    font = pygame.font.Font(None, 36)
+    text = font.render("GAME OVER", True, (255, 255, 255))
+    screen.blit(text, (width // 2-80, height // 2-30))
+    text = font.render("Press R to restart", True, (255, 255, 255))
+    screen.blit(text, widt //2-120, height // 2+30)
     
