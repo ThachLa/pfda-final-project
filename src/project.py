@@ -26,7 +26,6 @@ def main():
     font = pygame.font.Font(None, 36)
     game_over = False
     pipe_passed = False
-    
     pygame.init()
     
     screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -49,7 +48,7 @@ def main():
                     if event.key == pygame.K_r:
                         bird_x = 100
                         bird_y = 300
-                        bird_speed = 0 
+                        bird_speed = 0
                         pipe_x = WIDTH
                         pipe_height1 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
                         pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
@@ -69,7 +68,7 @@ def main():
                 pipe_passed = False
             if bird_y + bird_height >= HEIGHT or bird_y <=0:
                 game_over = True
-            if bird_x +bird_y > pipe_x and bird_x < pipe_x + pipe_width:
+            if bird_x + bird_width > pipe_x and bird_x < pipe_x + pipe_width:
                 if bird_y < pipe_height1 or bird_y + bird_height > pipe_height1 + 150:
                     game_over = True
                 if bird_y < pipe_height2 or bird_y + bird_height > pipe_height2 + 150:
@@ -84,7 +83,7 @@ def main():
                     if event.key == pygame.K_r:
                         bird_x = 100
                         bird_y = 300
-                        bird_speed = 0 
+                        bird_speed = 0
                         pipe_x = WIDTH
                         pipe_height1 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
                         pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
@@ -93,15 +92,17 @@ def main():
         show_score(screen, font, score)
         pygame.draw.rect(screen, GROUND_COLOR, (0, HEIGHT - 50, WIDTH, 50))
         pygame.display.update()
-        clock.tick(30)                
+        clock.tick(30)
 def draw_bird(screen, x, y, width, height):
     pygame.draw.rect(screen, (255, 0, 0), (x, y, width, height))
 def draw_pipe(screen, x, height1, height2, width, screen_height):
     pygame.draw.rect(screen, (0, 128, 0), (x, 0, width, height1))
-    pygame.draw.rect(screen, (0, 128, 0), (x,height2 + 150, width, screen_height - height2 - 150))
+    pygame.draw.rect(screen, (0, 128, 0), (x, height2 + 150, width, screen_height - height2 - 150))
+
 def show_score(screen, font, score):
-    text = font.render("Score: " + str(score), True, (0,0,0))
-    screen.blit(text, (10,10))
+    text = font.render("Score: " + str(score), True, (0, 0, 0))  # Set text color to black
+    screen.blit(text, (10, 10))
+
 def game_over_screen(screen, width, height):
     screen.fill((0, 0, 0))
     font = pygame.font.Font(None, 36)
