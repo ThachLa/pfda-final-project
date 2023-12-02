@@ -46,7 +46,7 @@ def main():
                         bird_speed = -bird_jump
             else:
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K.r:
+                    if event.key == pygame.K_r:
                         bird_x = 100
                         bird_y = 300
                         bird_speed = 0 
@@ -81,7 +81,7 @@ def main():
             game_over_screen(screen, WIDTH, HEIGHT)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K.r:
+                    if event.key == pygame.K_r:
                         bird_x = 100
                         bird_y = 300
                         bird_speed = 0 
