@@ -43,7 +43,17 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         bird_speed = -bird_jump
-            
+            else:
+                if event.type == pygame.KEYDOWN:
+                    if event.type == pygame.K.r:
+                        bird_x = 100
+                        bird_y = 300
+                        bird_speed = 0 
+                        pipe_x = WIDTH
+                        pipe_height1 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                        pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                        score = 0
+                        game_over = False
         if not game_over:
             screen.fill(WHITE)
             bird_speed += bird_gravity
@@ -51,6 +61,11 @@ def main():
             pipe_x -= pipe_speed
             draw_pipe(screen, pipe_x, pipe_height1, pipe_height2, pipe_width, HEIGHT)
             draw_bird(screen, bird_x, bird_y,bird_width, bird_height)
+            if pipe_x <= -pipe_width:
+                pipe_x = WIDTH
+                pipe_height1 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                pipe_passed = False
             if bird_y + bird_height >= HEIGHT or bird_y <=0:
                 game_over = True
             if bird_x +bird_y > pipe_x and bird_x < pipe_x + pipe_width:
@@ -63,7 +78,17 @@ def main():
                 pipe_passed = True
         if game_over:
             game_over_screen(screen, WIDTH, HEIGHT)
-            
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.type == pygame.K.r:
+                        bird_x = 100
+                        bird_y = 300
+                        bird_speed = 0 
+                        pipe_x = WIDTH
+                        pipe_height1 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                        pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
+                        score = 0
+                        game_over = False
 def draw_bird(screen, x, y, width, height):
     pygame.draw.rect(screen, (255, 0, 0), (x, y, width, height))
 def draw_pipe(screen, x, height1, height2, width, screen_height):
