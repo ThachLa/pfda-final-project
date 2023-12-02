@@ -25,7 +25,7 @@ def main():
     font = pygame.font.Font(None, 36)
     game_over = False
     pipe_passed = False
-    wings_flap_counter = 0
+    wing_flap_counter = 0
     pygame.init()
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -43,7 +43,7 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         bird_speed = -bird_jump
-                        wings_flap_counter = 15 
+                        wing_flap_counter = 15 
             else:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
@@ -94,11 +94,11 @@ def main():
         pygame.draw.rect(screen, GROUND_COLOR, (0, HEIGHT - 50, WIDTH, 50))
         pygame.display.update()
         clock.tick(30)
-        wings_flap_counter = max(0, wings_flap_counter - 1)
+        wing_flap_counter = max(0, wing_flap_counter - 1)
 
 def draw_bird(screen, x, y, size, wing_flap_counter):
     body_color = (255, 255, 0)  # Yellow color for the body
-    wing_color = (255, 0, 0)   # Red color for the wings
+    wing_color = (255, 0, 0)   # Red color for the wing
     beak_color = (255, 165, 0)  # Orange color for the beak
     #Body
     pygame.draw.circle(screen, body_color, (x + size // 2, y + size // 2), size // 2)
