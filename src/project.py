@@ -22,6 +22,7 @@ def main():
     pipe_x = WIDTH
     pipe_speed = 3
     score = 0
+    pygame.font.init()
     font = pygame.font.Font(None, 36)
     game_over = False
     pipe_passed = False
@@ -45,7 +46,7 @@ def main():
                         bird_speed = -bird_jump
             else:
                 if event.type == pygame.KEYDOWN:
-                    if event.type == pygame.K.r:
+                    if event.key == pygame.K.r:
                         bird_x = 100
                         bird_y = 300
                         bird_speed = 0 
@@ -80,7 +81,7 @@ def main():
             game_over_screen(screen, WIDTH, HEIGHT)
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.type == pygame.K.r:
+                    if event.key == pygame.K.r:
                         bird_x = 100
                         bird_y = 300
                         bird_speed = 0 
@@ -89,6 +90,10 @@ def main():
                         pipe_height2 =  random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
                         score = 0
                         game_over = False
+        show_score(screen, font, score)
+        pygame.draw.rect(screen, GROUND_COLOR, (0, HEIGHT - 50, WIDTH, 50))
+        pygame.display.update()
+        clock.tick(30)                
 def draw_bird(screen, x, y, width, height):
     pygame.draw.rect(screen, (255, 0, 0), (x, y, width, height))
 def draw_pipe(screen, x, height1, height2, width, screen_height):
@@ -103,5 +108,7 @@ def game_over_screen(screen, width, height):
     text = font.render("GAME OVER", True, (255, 255, 255))
     screen.blit(text, (width // 2-80, height // 2-30))
     text = font.render("Press R to restart", True, (255, 255, 255))
-    screen.blit(text, widt //2-120, height // 2+30)
-    
+    screen.blit(text, (width //2-120, height // 2+30))
+
+if __name__ == "__main__":
+    main()
