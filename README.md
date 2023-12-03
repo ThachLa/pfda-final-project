@@ -5,7 +5,7 @@ Flappy Bird Game Project
 Demo Video: <[URL][(https://youtu.be/-kP0MzCq_QA)](https://www.youtube.com/watch?v=dy5mQ7xpnho)>
 
 ## GitHub Repository
-GitHub Repo: <[URL](https://github.com/ThachLa/pfda-final-project.git)>
+GitHub Repo: <[URL](https://github.com/ThachLa/pfda-final-project.git)https://github.com/ThachLa/pfda-final-project.git>
 
 ## Description
 The Flappy Bird Game Project is a digital game that recreates the classic Flappy Bird game. It's relevant to media and digital arts as it involves game development, graphic design, and interactive media.
