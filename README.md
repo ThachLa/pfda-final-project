@@ -2,7 +2,7 @@
 # PROJECT TITLE
 Flappy Bird Game Project
 ## Demo
-Demo Video: <URL>
+Demo Video: <[URL](https://youtu.be/-kP0MzCq_QA)>
 
 ## GitHub Repository
 GitHub Repo: <[URL](https://github.com/ThachLa/pfda-final-project.git)>
