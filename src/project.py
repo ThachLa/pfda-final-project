@@ -54,6 +54,7 @@ def main():
                         bird_speed = -bird_jump
                         wing_flap_counter = 15
                         flap_sound.play()
+                        
             else:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
@@ -65,6 +66,7 @@ def main():
                         pipe_height2 = random.randint(MIN_PIPE_GAP, MAX_PIPE_GAP)
                         score = 0
                         game_over = False
+                        pygame.mixer.music.play(-1)
         if not game_over:
             screen.fill(WHITE)
             bird_speed += bird_gravity
@@ -80,13 +82,16 @@ def main():
             if bird_y + bird_size >= HEIGHT or bird_y <= 0:
                 game_over = True
                 hit_sound.play()
+                pygame.mixer.music.stop()
             if bird_x + bird_size > pipe_x and bird_x < pipe_x + pipe_width:
                 if bird_y < pipe_height1 or bird_y + bird_size > pipe_height1 + 150:
                     game_over = True
                     hit_sound.play()
+                    pygame.mixer.music.stop()
                 if bird_y < pipe_height2 or bird_y + bird_size > pipe_height2 + 150:
                     game_over = True
                     hit_sound.play()
+                    pygame.mixer.music.stop()
             if pipe_x + pipe_width < bird_x and not pipe_passed:
                 score += 1
                 pipe_passed = True
