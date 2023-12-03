@@ -43,7 +43,6 @@ def main():
     initial_delay = 1000  # 1 sec
     pygame.time.delay(initial_delay)
 
-    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,15 +82,13 @@ def main():
                 game_over = True
                 hit_sound.play()
                 pygame.mixer.music.stop()
-            if bird_x + bird_size > pipe_x and bird_x < pipe_x + pipe_width:
-                if bird_y < pipe_height1 or bird_y + bird_size > pipe_height1 + 150:
+
+            if pipe_x < bird_x + bird_size < pipe_x + pipe_width:
+                if not (pipe_height1 < bird_y < pipe_height1 + 150) and not (pipe_height2 < bird_y < pipe_height2 + 150):
                     game_over = True
                     hit_sound.play()
                     pygame.mixer.music.stop()
-                if bird_y < pipe_height2 or bird_y + bird_size > pipe_height2 + 150:
-                    game_over = True
-                    hit_sound.play()
-                    pygame.mixer.music.stop()
+
             if pipe_x + pipe_width < bird_x and not pipe_passed:
                 score += 1
                 pipe_passed = True
