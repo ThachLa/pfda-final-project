@@ -27,6 +27,14 @@ def main():
     pipe_passed = False
     wing_flap_counter = 0
     pygame.init()
+    #SFX
+    pygame.mixer.init()
+    flap_sound = pygame.mixer.Sound('flap-sfx.mp3')
+    hit_sound = pygame.mixer.Sound('hit-sfx.mp3')
+    point_sound = pygame.mixer.Sound('point-sfx.mp3')
+    #Background music
+    pygame.mixer.music.load('Background-music.mp3')
+    pygame.mixer.music.play(-1)
 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption('Flappy Bird')
@@ -35,6 +43,7 @@ def main():
     initial_delay = 1000  # 1 sec
     pygame.time.delay(initial_delay)
 
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -43,7 +52,8 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         bird_speed = -bird_jump
-                        wing_flap_counter = 15 
+                        wing_flap_counter = 15
+                        flap_sound.play()
             else:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_r:
@@ -69,14 +79,18 @@ def main():
                 pipe_passed = False
             if bird_y + bird_size >= HEIGHT or bird_y <= 0:
                 game_over = True
+                hit_sound.play()
             if bird_x + bird_size > pipe_x and bird_x < pipe_x + pipe_width:
                 if bird_y < pipe_height1 or bird_y + bird_size > pipe_height1 + 150:
                     game_over = True
+                    hit_sound.play()
                 if bird_y < pipe_height2 or bird_y + bird_size > pipe_height2 + 150:
                     game_over = True
+                    hit_sound.play()
             if pipe_x + pipe_width < bird_x and not pipe_passed:
                 score += 1
                 pipe_passed = True
+                point_sound.play()
         if game_over:
             game_over_screen(screen, WIDTH, HEIGHT)
             for event in pygame.event.get():
